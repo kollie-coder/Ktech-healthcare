@@ -3,28 +3,17 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Form } from "@/components/ui/form"
-  import { Input } from "@/components/ui/input";
-import { Button } from "../ui/button"
 import CustomFormField from "../CustomFormField"
 import SubmitButton from "../SubmitButton"
 import { useState } from "react"
 import { userFormValidation } from "@/lib/validation"
 import { useRouter } from "next/navigation"
 import { createUser } from "@/lib/actions/patient.actions"
+import { FormFieldType } from "./PatientForm"
 
-
-export enum FormFieldType {
-    INPUT = 'input',
-    TEXTAREA = 'textarea',
-    PHONE_INPUT = 'phoneInput',
-    CHECKBOX = 'checkbox',
-    DATE_PICKER = 'datePicker',
-    SELECT = 'select',
-    SKELETON = 'skeleton'
-}
   
- 
-const PatientForm = () => {
+
+const RegisterForm = ({ user }: { user: User }) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
@@ -59,7 +48,6 @@ const PatientForm = () => {
 
     setIsLoading(false);
   };
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
@@ -77,7 +65,7 @@ const PatientForm = () => {
          iconAlt="user"
         />
 
-        <CustomFormField
+        {/* <CustomFormField
             fieldType={FormFieldType.INPUT}
             control={form.control}
             name="email"
@@ -94,7 +82,7 @@ const PatientForm = () => {
             label="Phone Number"
             placeholder="(234) 123-4567-889"
             
-        />
+        /> */}
        <SubmitButton isLoading={isLoading}>
           Get Started
        </SubmitButton>
@@ -103,4 +91,4 @@ const PatientForm = () => {
   )
 }
 
-export default PatientForm;
+export default RegisterForm
